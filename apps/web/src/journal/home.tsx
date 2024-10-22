@@ -6,7 +6,7 @@ export function Home() {
     content: string;
   };
 
-  function submitMe(dataReceived: dataArea) {
+  async function submitMe(dataReceived: dataArea) {
     const URL = 'http://localhost:3000/api/journal';
 
     const finalData: dataArea = {
@@ -14,14 +14,24 @@ export function Home() {
       content: dataReceived.content,
     };
 
-    fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    try {
+      const response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(finalData),
+      });
 
-      body: JSON.stringify(finalData),
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
   return (
     <>
