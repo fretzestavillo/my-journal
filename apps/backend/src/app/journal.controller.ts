@@ -14,6 +14,7 @@ export class JournalController {
 
   @Post()
   postData(@Body() message: MessageDto): Promise<JournalEntity> {
+    console.log(message.title, message.content);
     return this.journalService.postData(message);
   }
 }
