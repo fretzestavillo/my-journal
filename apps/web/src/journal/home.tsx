@@ -88,11 +88,9 @@ export function Home() {
 
         <button className="waves-effect waves-light btn green">Fck you</button>
       </form>
-      <ol>
+      <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
         {receivedData.map((e) => (
           <li key={e.id}>
-            <p>{e.title}</p>
-            <p dangerouslySetInnerHTML={{ __html: e.content }} /> {}
             <small>
               Created at:{' '}
               {new Date(e.created_at).toLocaleString(undefined, {
@@ -103,9 +101,14 @@ export function Home() {
                 minute: 'numeric',
               })}
             </small>
+            <br />
+            <p>{e.title}</p>
+            <p dangerouslySetInnerHTML={{ __html: e.content }} /> {}
+            <br />
+            <br />
           </li>
         ))}
-      </ol>
+      </ul>
     </>
   );
 }
