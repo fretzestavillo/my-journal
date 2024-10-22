@@ -16,13 +16,29 @@ export class JournalService {
     return user;
   }
 
-  postData(message: MessageDto): Promise<JournalEntity> {
+  async postData(message: MessageDto): Promise<JournalEntity> {
     const { title, content } = message;
+    const now = new Date();
+    const currentDateString = now.toLocaleDateString();
 
-    const user = this.journalRepository.create({
-      title,
-      content,
+    const userLast = await this.journalRepository.find({
+      order: { created_at: 'DESC' },
+      take: 1,
     });
-    return this.journalRepository.save(user);
+
+    const dateFromDb = userLast[0].created_at;
+    const newDate = new Date(dateFromDb);
+    const fromDb = newDate.toLocaleDateString();
+
+    if (currentDateString === fromDb) {
+      userLast[0].content = content;
+      return this.journalRepository.save(userLast[0]);
+    } else {
+      const user = this.journalRepository.create({
+        title,
+        content,
+      });
+      return this.journalRepository.save(user);
+    }
   }
 }
