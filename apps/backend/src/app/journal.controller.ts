@@ -8,7 +8,7 @@ export class JournalController {
   constructor(private readonly journalService: JournalService) {}
 
   @Get()
-  getData() {
+  getData(): Promise<JournalEntity[]> {
     return this.journalService.getData();
   }
 

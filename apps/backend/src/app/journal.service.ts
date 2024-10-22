@@ -11,8 +11,9 @@ export class JournalService {
     private journalRepository: Repository<JournalEntity>
   ) {}
 
-  getData(): { message: string } {
-    return { message: 'Hello API' };
+  getData(): Promise<JournalEntity[]> {
+    const user = this.journalRepository.find();
+    return user;
   }
 
   postData(message: MessageDto): Promise<JournalEntity> {

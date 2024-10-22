@@ -1,10 +1,40 @@
-import { title } from 'process';
+import { useEffect, useState } from 'react';
 
 export function Home() {
   type dataArea = {
     title: string;
     content: string;
   };
+
+  type ListJournal = {
+    title: string;
+    content: string;
+    id: number;
+    created_at: string;
+  };
+
+  const [receivedData, setReceivedData] = useState<ListJournal[]>([]);
+  const URL = 'http://localhost:3000/api/journal';
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(URL);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: ListJournal[] = await response.json();
+        setReceivedData(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   async function submitMe(dataReceived: dataArea) {
     const URL = 'http://localhost:3000/api/journal';
@@ -26,9 +56,6 @@ export function Home() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -61,6 +88,15 @@ export function Home() {
 
         <button className="waves-effect waves-light btn green">Fck you</button>
       </form>
+      <ol>
+        {receivedData.map((e) => (
+          <li key={e.id}>
+            <p>{e.title}</p>
+            <p>{e.content}</p>
+            <small>Created at: {new Date(e.created_at).toLocaleString()}</small>
+          </li>
+        ))}
+      </ol>
     </>
   );
 }
