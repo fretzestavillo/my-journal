@@ -1,17 +1,13 @@
+import { title } from 'process';
+
 export function Home() {
   type dataArea = {
     title: string;
-    textArea: string;
+    content: string;
   };
 
   function submitMe(dataReceived: dataArea) {
-    console.log(dataReceived.title, dataReceived.textArea);
-
-    if (!dataReceived.title || !dataReceived.textArea) {
-      console.log('cannot proceed');
-    } else {
-      console.log('post data');
-    }
+    const URL = 'http://localhost:3000/api/journal';
   }
   return (
     <>
@@ -20,11 +16,11 @@ export function Home() {
           e.preventDefault();
           const formData = new FormData(e.currentTarget);
           const title = String(formData.get('title'));
-          const textArea = String(formData.get('textarea1'));
+          const content = String(formData.get('content'));
 
           const dataReceived = {
             title,
-            textArea,
+            content,
           };
 
           submitMe(dataReceived);
@@ -36,10 +32,7 @@ export function Home() {
         </div>
 
         <div className="input-field col s12">
-          <textarea
-            name="textarea1"
-            className="materialize-textarea"
-          ></textarea>
+          <textarea name="content" className="materialize-textarea"></textarea>
         </div>
 
         <button className="waves-effect waves-light btn green">Fck you</button>
