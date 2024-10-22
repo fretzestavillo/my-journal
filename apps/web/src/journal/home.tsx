@@ -93,7 +93,16 @@ export function Home() {
           <li key={e.id}>
             <p>{e.title}</p>
             <p>{e.content}</p>
-            <small>Created at: {new Date(e.created_at).toLocaleString()}</small>
+            <small>
+              Created at:{' '}
+              {new Date(e.created_at).toLocaleString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+              })}
+            </small>
           </li>
         ))}
       </ol>
