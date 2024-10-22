@@ -31,7 +31,7 @@ export class JournalService {
     const fromDb = newDate.toLocaleDateString();
 
     if (currentDateString === fromDb) {
-      userLast[0].content = content;
+      userLast[0].content += `<p>${content}</p>`;
       return this.journalRepository.save(userLast[0]);
     } else {
       const user = this.journalRepository.create({

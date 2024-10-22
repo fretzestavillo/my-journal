@@ -92,7 +92,7 @@ export function Home() {
         {receivedData.map((e) => (
           <li key={e.id}>
             <p>{e.title}</p>
-            <p>{e.content}</p>
+            <p dangerouslySetInnerHTML={{ __html: e.content }} /> {}
             <small>
               Created at:{' '}
               {new Date(e.created_at).toLocaleString(undefined, {
