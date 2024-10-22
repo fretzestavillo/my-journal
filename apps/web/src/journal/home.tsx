@@ -14,7 +14,6 @@ export function Home() {
       content: dataReceived.content,
     };
 
-    console.log(finalData);
     fetch(URL, {
       method: 'POST',
       headers: {
