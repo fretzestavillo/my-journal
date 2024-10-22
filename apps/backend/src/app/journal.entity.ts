@@ -6,10 +6,10 @@ export class JournalEntity {
   id: string;
 
   @Column()
-  tokenId: string;
+  title: string;
 
   @Column()
-  minuteCredits: string;
+  content: string;
 
   @Column({
     nullable: true,
