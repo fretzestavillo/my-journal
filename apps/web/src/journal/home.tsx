@@ -88,27 +88,31 @@ export function Home() {
 
         <button className="waves-effect waves-light btn green">Fck you</button>
       </form>
-      <ul style={{ listStyleType: 'none', padding: '0', margin: '0' }}>
-        {receivedData.map((e) => (
-          <li key={e.id}>
-            <small>
-              Created at:{' '}
-              {new Date(e.created_at).toLocaleString(undefined, {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
-            </small>
-            <br />
-            <p>{e.title}</p>
-            <p dangerouslySetInnerHTML={{ __html: e.content }} /> {}
-            <br />
-            <br />
-          </li>
-        ))}
-      </ul>
+
+      {receivedData.map((e) => (
+        <div key={e.id} className="row">
+          <div className="col s12 m6">
+            <div className="card blue-grey darken-1">
+              <div className="card-content white-text">
+                <small>
+                  Created at:{' '}
+                  {new Date(e.created_at).toLocaleString(undefined, {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })}
+                </small>
+                <br /> <br />
+                <p>{e.title}</p>
+                <br />
+                <p dangerouslySetInnerHTML={{ __html: e.content }} /> {}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </>
   );
 }
