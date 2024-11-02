@@ -1,7 +1,5 @@
-import { Home } from './journal/home';
+import { Test } from './journal/test';
 
 export function App() {
-  return <Home />;
+  return <Test />;
 }
-
-export default App;
