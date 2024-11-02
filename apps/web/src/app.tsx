@@ -1,5 +1,5 @@
-import { Test } from './journal/test';
+import { Home } from './journal/home';
 
 export function App() {
-  return <Test />;
+  return <Home />;
 }
